@@ -131,27 +131,28 @@
         </div>
     </section>
 
-   <footer>
-    <p>&copy; 2025 Iltrons Market | All Rights Reserved</p>
-</footer>
-
+   
 <script>
     function filterProducts() {
         let query = document.getElementById("search").value.toLowerCase();
-        let products = document.querySelectorAll(".product");
+        let products = Array.from(document.querySelectorAll(".product"));
+        let recommendations = document.getElementById("recommendations");
+        recommendations.innerHTML = "";
         
         products.forEach(product => {
             let name = product.getElementsByTagName("h2")[0].innerText.toLowerCase();
             let description = product.getElementsByTagName("p")[0].innerText.toLowerCase();
             
-            if (query === "" || name.includes(query) || description.includes(query)) {
-                product.style.display = "block";
-            } else {
-                product.style.display = "none";
+            if (query !== "" && (name.includes(query) || description.includes(query))) {
+                let clone = product.cloneNode(true);
+                recommendations.appendChild(clone);
             }
         });
     }
 </script>
+        <footer>
+    <p>&copy; 2025 Iltrons Market | All Rights Reserved</p>
+        </footer>
 
 </body>
 </html>
